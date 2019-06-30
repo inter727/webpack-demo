@@ -1,7 +1,10 @@
 // path为Node的核心模块
 const path = require('path');
+const htmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
@@ -28,6 +31,10 @@ module.exports = {
         }, 'postcss-loader']   //从右到左的顺序调用，所以顺序不能错
       }
     ]
-  }
+  },
+  plugins: [
+    new htmlWebpackPlugin({template: './src/index.html'}),
+    new CleanWebpackPlugin()
+  ]
 }
 
