@@ -20,10 +20,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']   //从右到左的顺序调用，所以顺序不能错
+        use: ['style-loader', {
+          loader: 'css-loader',
+          options: {
+            modules: true
+          }
+        }, 'postcss-loader']   //从右到左的顺序调用，所以顺序不能错
       }
     ]
-  },
-  plugins: [require('autoprefixer')]
+  }
 }
 

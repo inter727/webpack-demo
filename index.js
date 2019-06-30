@@ -1,9 +1,12 @@
 import avatar from './avatar.jpg'
-import './index.css'
+import style from './index.css'
+import createAvatar from './createAvatar'
+
+createAvatar()
 
 var root = document.getElementById('root')
 var img = new Image()
 img.src = avatar
-img.classList.add('avatar')
+img.classList.add(style['avatar'])
 
 root.appendChild(img)
