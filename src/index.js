@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import './style.css'
 import counter from "./counter";
 import number from "./number";
@@ -14,6 +15,17 @@ btn.onclick = function() {
 
 counter()
 number()
+
+
+const arr = [
+  new Promise(() => {}),
+  new Promise(() => {}),
+  new Promise(() => {})
+]
+
+arr.map(item => {
+  console.log(item);
+})
 
 // 额外的模块HMR配置
 if(module.hot) {

@@ -30,6 +30,13 @@ module.exports = {
             modules: true
           }
         }, 'postcss-loader']   //从右到左的顺序调用，所以顺序不能错
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
       }
     ]
   },
@@ -45,6 +52,6 @@ module.exports = {
     hot: true, // 启用模块热更新
     hotOnly: true // 模块热更新启动失败时，重新刷新浏览器
   },
-  devtool: "cheap-module-eval-source-map"
+  devtool: "none"
 }
 
