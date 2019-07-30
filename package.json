@@ -18,6 +18,10 @@
     "url": "https://github.com/inter727/webpack-demo/issues"
   },
   "homepage": "https://github.com/inter727/webpack-demo#readme",
+  "sideEffects": [
+    "*.css",
+    "@babel/polyfill"
+  ],
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/polyfill": "^7.4.4",
