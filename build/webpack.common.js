@@ -2,6 +2,8 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const miniCssExtractPlugin = require('mini-css-extract-plugin')
+const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -22,12 +24,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', {
-          loader: 'css-loader',
-          options: {
-            modules: true
-          }
-        }, 'postcss-loader']   //从右到左的顺序调用，所以顺序不能错
+        use: [
+          {
+            loader: miniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+              reloadAll: true
+            }
+          },
+          'css-loader', 'postcss-loader'  //从右到左的顺序调用，所以顺序不能错
+        ]
       },
       {
         test: /\.js$/,
@@ -40,7 +46,11 @@ module.exports = {
   },
   plugins: [
     new htmlWebpackPlugin({template: './src/index.html'}),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new miniCssExtractPlugin({
+      filename: '[name].css'
+    }),
+    new optimizeCssAssetsWebpackPlugin()
   ],
   optimization: {
     splitChunks: {

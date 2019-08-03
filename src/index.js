@@ -1,6 +1,7 @@
 // import _ from 'lodash'
 import '@babel/polyfill'
 import './style.css'
+import './style1.css'
 import { add } from './main'
 
 add(1, 4)
