@@ -12,11 +12,10 @@ document.addEventListener('click', () => {
   })
 })
 
-function getComponent() {
+async function getComponent() {
   //括号内魔法注释，含义是告诉 Webpack 异步模块的名字为 lodash
-  return import(/* webpackChunkName: 'lodash' */'lodash').then(({default: _}) => {
-    let div = document.createElement('div')
-    div.innerHTML = _.join([1, 2], 3)
-    return div
-  })
+  const {default: _} = await import(/* webpackPrefetch: true */'lodash')
+  let div = document.createElement('div')
+  div.innerHTML = _.join([1, 2], 3)
+  return div
 }
