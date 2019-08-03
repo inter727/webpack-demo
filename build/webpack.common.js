@@ -1,5 +1,6 @@
 // path为Node的核心模块
 const path = require('path')
+const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -50,7 +51,11 @@ module.exports = {
     new miniCssExtractPlugin({
       filename: '[name].css'
     }),
-    new optimizeCssAssetsWebpackPlugin()
+    new optimizeCssAssetsWebpackPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      _: 'lodash'
+    })
   ],
   optimization: {
     splitChunks: {

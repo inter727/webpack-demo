@@ -1,8 +1,12 @@
 // import _ from 'lodash'
+import $ from 'jquery'
 import '@babel/polyfill'
 import './style.css'
 import './style1.css'
 import { add } from './main'
+import { UI } from './jquery.ui'
+
+UI()
 
 add(1, 4)
 // console.log(_.join(['Dell','Lee'], ' '))
