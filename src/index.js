@@ -1,5 +1,6 @@
 // import _ from 'lodash'
 import $ from 'jquery'
+import axios from 'axios'
 import '@babel/polyfill'
 import './style.css'
 import './style1.css'
@@ -32,3 +33,8 @@ if('serviceWorker' in navigator) {
     console.log('注册失败');
   })
 }
+
+axios.get('/react/api/header.json').then(res => {
+  let {data, status} = res;
+  console.log(data);
+})

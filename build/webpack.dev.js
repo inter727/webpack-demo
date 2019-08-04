@@ -10,7 +10,15 @@ const devConfig = {
     open: true,
     port: 4200,
     hot: true, // 启用模块热更新
-    hotOnly: true // 模块热更新启动失败时，重新刷新浏览器
+    hotOnly: true, // 模块热更新启动失败时，重新刷新浏览器
+    proxy: {
+      '/react/api': {
+        target: 'http://www.dell-lee.com',
+        pathRewrite: {
+          'header.json': 'demo.json'
+        }
+      }
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
