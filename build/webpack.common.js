@@ -2,9 +2,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
-const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -47,11 +45,9 @@ module.exports = {
   },
   plugins: [
     new htmlWebpackPlugin({template: './src/index.html'}),
-    new CleanWebpackPlugin(),
     new miniCssExtractPlugin({
       filename: '[name].css'
     }),
-    new optimizeCssAssetsWebpackPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       _: 'lodash'

@@ -1,5 +1,8 @@
 const merge = require('webpack-merge')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
+const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const workboxWebpackPlugin = require('workbox-webpack-plugin')
 const commonConfig = require('./webpack.common')
 
 const prodConfig = {
@@ -10,12 +13,20 @@ const prodConfig = {
   mode: 'production',
   devtool: 'cheap-module-source-map',
   plugins: [
+    new CleanWebpackPlugin(),
     new miniCssExtractPlugin({
       filename: '[name].[contenthash].css'
+    }),
+    new workboxWebpackPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
     })
   ],
   optimization: {
-    usedExports: true
+    usedExports: true,
+    minimizer: [
+      new optimizeCssAssetsWebpackPlugin()
+    ]
   }
 }
 

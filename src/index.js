@@ -24,3 +24,11 @@ async function getComponent() {
   div.innerHTML = _.join([1, 2], 3)
   return div
 }
+
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js').then((register) => {
+    console.log('注册成功');
+  }).catch(error => {
+    console.log('注册失败');
+  })
+}
