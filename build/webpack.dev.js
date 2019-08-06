@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const commonConfig = require('./webpack.common')
 
 const devConfig = {
@@ -21,7 +22,10 @@ const devConfig = {
     }
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new miniCssExtractPlugin({
+      filename: '[name].css'
+    })
   ]
 }
 

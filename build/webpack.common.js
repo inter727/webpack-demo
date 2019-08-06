@@ -4,10 +4,24 @@ const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 
-module.exports = {
-  entry: './src/index.js',
+const makeHtmlPlugins = function(obj) {
+  return Object.keys(obj).map(function (key) {
+    return new htmlWebpackPlugin({
+      template: 'src/page/index.html',
+      filename: key + '.html',
+      chunks: [key]
+    })
+  })
+}
+
+let config = {
+  entry: {
+    index: './src/js/index.js',
+    detail: './src/js/detail.js',
+    list: './src/js/list.js'
+  },
   output: {
-    filename: 'main.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, '../dist')
   },
   module: {
@@ -44,10 +58,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new htmlWebpackPlugin({template: './src/index.html'}),
-    new miniCssExtractPlugin({
-      filename: '[name].css'
-    }),
     new webpack.ProvidePlugin({
       $: 'jquery',
       _: 'lodash'
@@ -77,3 +87,7 @@ module.exports = {
     }
   }
 }
+
+config.plugins = config.plugins.concat(makeHtmlPlugins(config.entry))
+
+module.exports = config
