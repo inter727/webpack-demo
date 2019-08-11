@@ -85,6 +85,13 @@ let config = {
         }
       }
     }
+  },
+  resolve: {
+    extensions: ['.js', '.css'],
+    mainFields: ['main', 'index'],
+    alias: {
+      css: path.resolve(__dirname, '../src/css')
+    }
   }
 }
 

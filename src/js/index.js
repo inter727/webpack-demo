@@ -2,8 +2,8 @@
 import $ from 'jquery'
 import axios from 'axios'
 import '@babel/polyfill'
-import '../css/style.css'
-import '../css/style1.css'
+import 'css/style'
+import 'css/style1'
 import { add } from '../js/main'
 import { UI } from '../js/jquery.ui'
 
