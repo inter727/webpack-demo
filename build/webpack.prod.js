@@ -4,6 +4,7 @@ const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const workboxWebpackPlugin = require('workbox-webpack-plugin')
 const commonConfig = require('./webpack.common')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const prodConfig = {
   output: {
@@ -20,7 +21,8 @@ const prodConfig = {
     new workboxWebpackPlugin.GenerateSW({
       clientsClaim: true,
       skipWaiting: true
-    })
+    }),
+    new BundleAnalyzerPlugin()
   ],
   optimization: {
     usedExports: true,
