@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
+const addAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
 
 const makeHtmlPlugins = function(obj) {
   return Object.keys(obj).map(function (key) {
@@ -60,7 +61,11 @@ let config = {
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery',
-      _: 'lodash'
+      _: 'lodash',
+      axios: 'axios'
+    }),
+    new webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, '../dll/vendors.manifest.json')
     })
   ],
   optimization: {
@@ -96,5 +101,8 @@ let config = {
 }
 
 config.plugins = config.plugins.concat(makeHtmlPlugins(config.entry))
+config.plugins.push(new addAssetHtmlWebpackPlugin({
+  filepath: path.resolve(__dirname, '../dll/vendors.dll.js')
+}))
 
 module.exports = config

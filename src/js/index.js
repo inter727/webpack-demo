@@ -1,6 +1,4 @@
 // import _ from 'lodash'
-import $ from 'jquery'
-import axios from 'axios'
 import '@babel/polyfill'
 import 'css/style'
 import 'css/style1'
