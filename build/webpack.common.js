@@ -1,5 +1,6 @@
 // path为Node的核心模块
 const path = require('path')
+const fs = require('fs')
 const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -101,8 +102,26 @@ let config = {
 }
 
 config.plugins = config.plugins.concat(makeHtmlPlugins(config.entry))
-config.plugins.push(new addAssetHtmlWebpackPlugin({
-  filepath: path.resolve(__dirname, '../dll/vendors.dll.js')
-}))
+
+// 动态分析文件
+const files = fs.readdirSync(path.resolve(__dirname, '../dll'))
+files.forEach(file => {
+  // 如果是xxx.dll.js文件
+  if(/.*\.dll.js/.test(file)) {
+    config.plugins.push(
+      new addAssetHtmlWebpackPlugin({
+        filepath: path.resolve(__dirname, '../dll', file)
+      })
+    )
+  }
+  // 如果是xxx.manifest.json文件
+  if(/.*\.manifest.json/.test(file)) {
+    config.plugins.push(
+      new webpack.DllReferencePlugin({
+        manifest: path.resolve(__dirname, '../dll', file)
+      })
+    )
+  }
+})
 
 module.exports = config
