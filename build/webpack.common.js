@@ -53,9 +53,13 @@ let config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: [
+          'babel-loader',
+          {
+            loader: "replaceLoader",
+            options: { word: 'very good' }
+          }
+        ]
       }
     ]
   },
@@ -98,6 +102,9 @@ let config = {
     alias: {
       css: path.resolve(__dirname, '../src/css')
     }
+  },
+  resolveLoader: {
+    modules: ['node_modules', path.resolve(__dirname, '../loader')]
   }
 }
 
