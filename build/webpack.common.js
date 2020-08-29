@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const addAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
+const copyrightPlugin = require('../plugin/copyrightPlugin')
 
 const makeHtmlPlugins = function(obj) {
   return Object.keys(obj).map(function (key) {
@@ -71,6 +72,9 @@ let config = {
     }),
     new webpack.DllReferencePlugin({
       manifest: path.resolve(__dirname, '../dll/vendors.manifest.json')
+    }),
+    new copyrightPlugin({
+      name: 'zby'
     })
   ],
   optimization: {
